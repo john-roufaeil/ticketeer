@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins, Cairo } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/app/components/theme-provider"
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -24,9 +25,16 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body dir="auto" className={`${poppins.variable} ${cairo.variable} antialiased`}>
-                {children}
+        <html lang="en" suppressHydrationWarning>
+            <body dir="auto" className={`${poppins.variable} ${cairo.variable} bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text antialiased`}>
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    enableColorScheme
+                >
+                    {children}
+                </ThemeProvider>
             </body>
         </html>
     );
