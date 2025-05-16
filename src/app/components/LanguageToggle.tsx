@@ -1,14 +1,13 @@
 "use client";
 
-import { useTheme } from "next-themes";
-import { Moon, Sun } from "lucide-react";
+
+import { useLanguage } from "@/context/LanguageContext";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
-export function ModeToggle() {
-    const { setTheme, resolvedTheme } = useTheme();
+export function LanguageToggle() {
     const [mounted, setMounted] = useState(false);
-
+    const { language, setLanguage } = useLanguage();
     // Avoid hydration issues
     useEffect(() => {
         setMounted(true);
@@ -16,14 +15,14 @@ export function ModeToggle() {
 
     if (!mounted) return null;
 
-    const isDark = resolvedTheme === "dark";
+    const isEnglish = language === "en";
 
     return (
         <Button
-            onClick={() => setTheme(isDark ? "light" : "dark")}
+            onClick={() => setLanguage(isEnglish ? "ar" : "en")}
             className="flex items-center gap-2 px-4 py-2 border rounded"
         >
-            {isDark ? <Sun size={16} /> : <Moon size={16} />}
+            {isEnglish ? "العربية" : "EN"}
         </Button>
     );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Cairo } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/app/components/theme-provider"
+import { LanguageProvider } from "@/context/LanguageContext";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -26,15 +27,17 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body dir="auto" className={`${poppins.variable} ${cairo.variable} bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text antialiased`}>
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="system"
-                    enableSystem
-                    enableColorScheme
-                >
-                    {children}
-                </ThemeProvider>
+            <body dir="auto" className={`${poppins.variable} ${cairo.variable} bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text antialiased transition-all scroll-smooth duration-300`}>
+                <LanguageProvider>
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="system"
+                        enableSystem
+                        enableColorScheme
+                    >
+                        {children}
+                    </ThemeProvider>
+                </LanguageProvider>
             </body>
         </html>
     );
