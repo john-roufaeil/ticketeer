@@ -29,9 +29,8 @@ export default function Header() {
     const theme = resolvedTheme === "dark" ? "dark" : "light";
 
     const navLinks = [
-        { href: "/", label: t("nav.home") },
+        { href: "/", label: t("nav.events") },
         { href: "/about", label: t("nav.about") },
-        { href: "/events", label: t("nav.events") },
     ];
 
     const Logo = () => (
