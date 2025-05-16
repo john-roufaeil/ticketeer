@@ -8,15 +8,26 @@ interface LanguageContextType {
     setLanguage: (lang: Language) => void;
     t: (key: string) => string;
 }
+type TranslationValue = string | { [key: string]: TranslationValue };
 
 export const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 const translations = {
     en: {
         hello: "Hello",
+        nav: {
+            home: "Home",
+            about: "About",
+            events: "Events",
+        }
     },
     ar: {
         hello: "مرحبا",
+        nav: {
+            home: "الرئيسية",
+            about: "من نحن",
+            events: "الفعاليات",
+        }
     }
 };
 
@@ -40,8 +51,23 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
     }, [language]);
 
-    const translate = (key: string): string =>
-        translations[language][key as keyof typeof translations.en] || key;
+    function getNestedValue(obj: TranslationValue, path: string[]): TranslationValue | undefined {
+        let result: TranslationValue | undefined = obj;
+        for (const key of path) {
+            if (typeof result === "object" && result !== null && key in result) {
+                result = result[key];
+            } else {
+                return undefined;
+            }
+        }
+        return result;
+    }
+
+    const translate = (key: string): string => {
+        const keys = key.split(".");
+        const result = getNestedValue(translations[language], keys);
+        return typeof result === "string" ? result : key;
+    };
 
     const value = {
         language,

@@ -3,6 +3,7 @@ import { Poppins, Cairo } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/app/components/theme-provider"
 import { LanguageProvider } from "@/context/LanguageContext";
+import Header from "./components/Header";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -27,7 +28,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body dir="auto" className={`${poppins.variable} ${cairo.variable} bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text antialiased transition-all scroll-smooth duration-300`}>
+            <body dir="auto" className={`${poppins.variable} ${cairo.variable} bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text antialiased scroll-smooth`}>
                 <LanguageProvider>
                     <ThemeProvider
                         attribute="class"
@@ -35,6 +36,7 @@ export default function RootLayout({
                         enableSystem
                         enableColorScheme
                     >
+                        <Header />
                         {children}
                     </ThemeProvider>
                 </LanguageProvider>

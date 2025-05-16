@@ -22,7 +22,7 @@ export function LanguageToggle() {
             onClick={() => setLanguage(isEnglish ? "ar" : "en")}
             className="flex items-center gap-2 px-4 py-2 border rounded"
         >
-            {isEnglish ? "العربية" : "EN"}
+            {isEnglish ? "العربية" : "English"}
         </Button>
     );
 }
