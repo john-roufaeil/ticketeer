@@ -3,13 +3,13 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-light-primary: #4886B5;
+  --color-light-primary: #BF211E;
   --color-light-accent: #FFB347;
   --color-light-surface: #F7F7F7;
   --color-light-background: #FFF;
   --color-light-text: #1A1A1A;
 
-  --color-dark-primary: #82C3F0;
+  --color-dark-primary: #E97472;
   --color-dark-accent: #FFD08A;
   --color-dark-surface: #141414;
   --color-dark-background: #1E1E1E;

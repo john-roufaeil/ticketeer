@@ -19,6 +19,14 @@ const translations = {
             home: "Home",
             about: "About",
             events: "Events",
+        },
+        footer: {
+            contact: "Contact Us",
+            links: "Quick Links",
+            faq: "FAQ",
+            terms: "Terms & Conditions",
+            privacy: "Privacy Policy",
+            rights: "All rights reserved.",
         }
     },
     ar: {
@@ -27,6 +35,14 @@ const translations = {
             home: "الرئيسية",
             about: "من نحن",
             events: "الفعاليات",
+        },
+        footer: {
+            contact: "تواصل معنا",
+            links: "روابط سريعة",
+            faq: "الأسئلة الشائعة",
+            terms: "الشروط والأحكام",
+            privacy: "سياسة الخصوصية",
+            rights: "جميع الحقوق محفوظة",
         }
     }
 };

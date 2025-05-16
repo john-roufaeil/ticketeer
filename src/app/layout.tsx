@@ -3,7 +3,8 @@ import { Poppins, Cairo } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/app/components/theme-provider"
 import { LanguageProvider } from "@/context/LanguageContext";
-import Header from "./components/Header";
+import Header from "@/app/components/layout/Header";
+import Footer from "@/app/components/layout/Footer";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -37,7 +38,10 @@ export default function RootLayout({
                         enableColorScheme
                     >
                         <Header />
-                        {children}
+                        <div className="min-h-[80vh]">
+                            {children}
+                        </div>
+                        <Footer />
                     </ThemeProvider>
                 </LanguageProvider>
             </body>
