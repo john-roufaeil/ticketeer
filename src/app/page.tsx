@@ -9,6 +9,7 @@ export default function HomePage() {
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
+        console.log("fetching events")
         const fetchEvents = async () => {
             const res = await fetch('/api/events');
             const data = await res.json();
@@ -19,9 +20,12 @@ export default function HomePage() {
 
     type Event = {
         _id: string;
-        name: string;
-        description: string;
-        category: string;
+        nameEN: string;
+        nameAR: string;
+        descriptionEN: string;
+        descriptionAR: string;
+        categoryEN: string;
+        categoryAR: string;
         date: string;
         image: string;
     };
@@ -31,15 +35,15 @@ export default function HomePage() {
             <Hero />
             <div className="space-y-8 px-24 mb-16">
                 <section className="space-y-4">
-                    <h2 className="text-3xl font-semibold">{t('homepage.featuredEvents')}</h2>
+                    <h2 className="text-3xl font-semibold">{t('homepage.availableEvents')}</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {events.length > 0 ? (
                             events.map((event: Event) => (
                                 <div key={event?._id} className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 transition hover:shadow-lg">
-                                    <img src={event.image || "/placeholder.jpg"} alt={event?.name} className="w-full h-48 object-cover rounded mb-4" />
-                                    <h3 className="text-xl font-semibold mb-2">{event?.name}</h3>
-                                    <p className="text-gray-600 dark:text-gray-400 mb-2">{event?.category} - {new Date(event?.date).toLocaleDateString(language)}</p>
-                                    <p className="text-gray-700 dark:text-gray-300 mb-4">{event?.description}</p>
+                                    <img src={event.image || "/placeholder.jpg"} alt={event?.nameEN} className="w-full h-48 object-cover rounded mb-4" />
+                                    <h3 className="text-xl font-semibold mb-2">{language === "ar" ? event?.nameAR : event?.nameEN}</h3>
+                                    <p className="text-gray-600 dark:text-gray-400 mb-2">{language === "ar" ? event?.categoryAR : event?.categoryEN} - {new Date(event?.date).toLocaleDateString(language)}</p>
+                                    <p className="text-gray-700 dark:text-gray-300 mb-4">{language === "ar" ? event?.descriptionAR : event?.descriptionEN}</p>
                                     <Link href={`/events/${event?._id}`} className="inline-block bg-light-primary dark:bg-dark-primary text-white px-4 py-2 rounded hover:opacity-90 transition">
                                         {t('homepage.bookNow')}
                                     </Link>

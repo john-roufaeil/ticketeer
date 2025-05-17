@@ -30,6 +30,8 @@ const translations = {
             browse: "Browse available events",
             book: "Book your ticket instantly",
             confirmation: "Get your confirmation and enjoy!",
+            bookNow: "Book Now",
+            availableEvents: "Available Events",
         },
         nav: {
             home: "Home",
@@ -63,6 +65,8 @@ const translations = {
             browse: "استعرض الفعاليات المتاحة",
             book: "احجز تذكرتك على الفور",
             confirmation: "احصل على تأكيدك واستمتع!",
+            bookNow: "احجز الآن",
+            availableEvents: "الفعاليات المتاحة",
         },
         nav: {
             home: "الرئيسية",
