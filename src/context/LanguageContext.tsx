@@ -84,6 +84,22 @@ const translations = {
             message: "You have successfully booked the event.",
             viewDetails: "View Details",
             backToEvents: "Back to Events",
+        },
+        about: {
+            title: "About Ticketeer",
+            subtitle: "Your Gateway to Memorable Experiences",
+            welcomeIllustration: "/images/about-illustration.png", // example path
+            description1: "Ticketeer connects you with the best events, from concerts and workshops to conferences and expos, all in one platform.",
+            description2: "We partner with event organizers to provide seamless ticketing, instant booking confirmations, and transparent pricing.",
+            description3: "Whether you’re looking to learn, network, or have fun, Ticketeer helps you find and book events effortlessly.",
+            mission: {
+                title: "Our Mission",
+                description: "To make discovering and booking events simple, accessible, and enjoyable for everyone."
+            },
+            vision: {
+                title: "Our Vision",
+                description: "To be the leading platform for connecting people with events they love, worldwide."
+            }
         }
     },
     ar: {
@@ -156,6 +172,22 @@ const translations = {
             message: "لقد قمت بحجز الفعالية بنجاح.",
             viewDetails: "عرض التفاصيل",
             backToEvents: "العودة إلى الفعاليات",
+        },
+        about: {
+            title: "حول تيكيتر",
+            subtitle: "بوابتك إلى تجارب لا تُنسى",
+            welcomeIllustration: "/images/about-illustration.png", // مثال على المسار
+            description1: "تيكيتر يربطك بأفضل الفعاليات من حفلات موسيقية وورش عمل إلى مؤتمرات ومعارض، كل ذلك في منصة واحدة.",
+            description2: "نتعاون مع منظمي الفعاليات لتوفير تجربة حجز سلسة، وتأكيدات فورية، وتسعير شفاف.",
+            description3: "سواء كنت تبحث عن التعلم أو التواصل أو الاستمتاع، تيكيتر يساعدك في العثور على الفعاليات وحجزها بسهولة.",
+            mission: {
+                title: "مهمتنا",
+                description: "جعل اكتشاف وحجز الفعاليات بسيطًا ومتاحًا وممتعًا للجميع."
+            },
+            vision: {
+                title: "رؤيتنا",
+                description: "أن نكون المنصة الرائدة لربط الناس بالفعاليات التي يحبونها حول العالم."
+            }
         }
     }
 };
