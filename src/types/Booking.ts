@@ -1,6 +1,8 @@
+import Event from "./Event";
+
 type Booking = {
   _id: string;
-  eventId: string;
+  eventId: string | Event;
   userId: string;
 };
 

@@ -9,7 +9,6 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { toast } from "sonner";
-import Link from "next/link";
 
 export default function ProductDetailsPage() {
     const { user, bookings, login } = useAuth();
@@ -17,7 +16,15 @@ export default function ProductDetailsPage() {
     const { id } = useParams<{ id: string }>();
     const router = useRouter();
     const [event, setEvent] = useState<Event | null>(null);
-    const isBooked = event ? bookings.some(booking => booking.eventId._id === event._id) : false;
+    const isBooked = event
+        ? bookings.some(booking => {
+            if (typeof booking.eventId === 'string') {
+                return booking.eventId === event._id;
+            } else {
+                return booking.eventId._id === event._id;
+            }
+        })
+        : false;
 
     useEffect(() => {
         const fetchEventByID = async () => {

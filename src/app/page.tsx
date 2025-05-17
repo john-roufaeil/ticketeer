@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import Link from "next/link";
 import Event from "@/types/Event";
 import { useAuth } from "@/context/AuthContext";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function HomePage() {
     const { t, language } = useLanguage();
@@ -31,11 +31,18 @@ export default function HomePage() {
                         {events.length > 0 ? (
                             events.map((event: Event) => {
                                 console.log(event);
-                                const isBooked = event ? bookings.some(booking => booking.eventId._id === event._id) : false;
-
+                                const isBooked = event
+                                    ? bookings.some(booking => {
+                                        if (typeof booking.eventId === 'string') {
+                                            return booking.eventId === event._id;
+                                        } else {
+                                            return booking.eventId._id === event._id;
+                                        }
+                                    })
+                                    : false;
                                 return (
                                     <div key={event?._id} className="bg-light-surface dark:bg-dark-surface rounded-lg shadow p-4 transition hover:shadow-lg">
-                                        <img src={event.image || "/placeholder.jpg"} alt={event?.nameEN} className="w-full h-48 object-cover rounded mb-4" />
+                                        <Image width={100} height={100} src={event.image || "/placeholder.jpg"} alt={event?.nameEN} className="w-full h-48 object-cover rounded mb-4" />
                                         <h3 className="text-xl font-semibold mb-2">{language === "ar" ? event?.nameAR : event?.nameEN}</h3>
                                         <p className="text-gray-600 dark:text-gray-400 mb-2">{language === "ar" ? event?.categoryAR : event?.categoryEN} - {new Date(event?.date).toLocaleDateString(language)}</p>
                                         <p className="text-gray-700 dark:text-gray-300 mb-4">{language === "ar" ? event?.descriptionAR : event?.descriptionEN}</p>
