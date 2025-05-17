@@ -1,4 +1,4 @@
-import { dbConnect } from '@/lib/dbConnect';
+import dbConnect from "@/app/lib/mongodb";
 import User from '@/models/User';
 
 export async function GET(_, { params }) {

@@ -1,5 +1,4 @@
 import dbConnect from "@/app/lib/mongodb";
-
 import Event from "@/models/Event";
 
 export async function GET() {

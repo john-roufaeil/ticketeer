@@ -1,4 +1,4 @@
-import { dbConnect } from '@/lib/dbConnect';
+import dbConnect from "@/app/lib/mongodb";
 import Booking from '@/models/Booking';
 
 export async function POST(req) {
