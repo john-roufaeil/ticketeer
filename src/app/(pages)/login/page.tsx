@@ -9,12 +9,14 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import Link from 'next/link';
 import { toast } from 'sonner';
 import { useLanguage } from "@/context/LanguageContext";
+import { Eye, EyeOff } from 'lucide-react';
 
 export default function LoginPage() {
     const { t } = useLanguage();
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const router = useRouter();
     const { login } = useAuth();
 
@@ -67,19 +69,29 @@ export default function LoginPage() {
                                 className="h-10"
                             />
                         </div>
-                        <div className="space-y-2">
+                        <div className="space-y-2 relative">
                             <div className="flex items-center justify-between">
                                 <Label htmlFor="password">{t('auth.password')}</Label>
                             </div>
-                            <Input
-                                id="password"
-                                type="password"
-                                value={password}
-                                placeholder={t('auth.password')}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                                className="h-10"
-                            />
+                            <div className="relative">
+                                <Input
+                                    id="password"
+                                    type={showPassword ? 'text' : 'password'}
+                                    value={password}
+                                    placeholder={t('auth.password')}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                    className="h-10 pr-10"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute inset-y-0 right-2 flex items-center text-gray-500"
+                                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                                >
+                                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                </button>
+                            </div>
                         </div>
                         <Button variant="primary" type="submit" className="w-full h-10" disabled={isLoading}>
                             {isLoading ? t('auth.signingIn') : t('auth.signin')}
