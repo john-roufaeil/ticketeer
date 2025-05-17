@@ -20,6 +20,8 @@ It also provides an **Admin Panel** for event managers to:
 - 🧑‍💼 Admin Panel for Event Management (CRUD)
 - 🌓 Light & Dark Mode Support
 - 🌐 Multi-Language Support (English & Arabic)
+- 🛡️ JWT-Protected API Routes
+- 🚫 Admin-Only Access to Event Management Endpoints
 
 ---
 
