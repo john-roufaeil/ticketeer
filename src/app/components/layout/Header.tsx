@@ -55,7 +55,7 @@ export default function Header() {
 
     return (
         <header
-            className={`sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur px-4 ${language === "ar" ? "rtl" : "ltr"
+            className={`sticky top-0 z-50 w-full bg-white/70 dark:bg-transparent border-b bg-background/95 backdrop-blur px-4 ${language === "ar" ? "rtl" : "ltr"
                 }`}
         >
             <div className={`${language === "ar" && isMobile ? "flex-row-reverse" : "flex-row"} flex h-20 items-center justify-between w-full`}>

@@ -14,7 +14,23 @@ export const LanguageContext = createContext<LanguageContextType | undefined>(un
 
 const translations = {
     en: {
-        hello: "Hello",
+        homepage: {
+            ticketeer: "Ticketeer",
+            slogan: "Make Your Next Event Unforgettable",
+            description: "Discover, Book, and Enjoy Events Near You.",
+            howItWorks: "How It Works",
+            whyTicketeer: "Why Ticketeer?",
+            testimonials: "What Our Users Say",
+            browseEvents: "Browse Events",
+            trusted: "Trusted by event organizers",
+            instantBooking: "Instant booking confirmation",
+            noHiddenFees: "No hidden fees",
+            testimonial1: "Smooth booking experience and excellent customer service. - Sarah Mohamed",
+            testimonial2: "I found all the top events in my city easily. - Ahmed Ali",
+            browse: "Browse available events",
+            book: "Book your ticket instantly",
+            confirmation: "Get your confirmation and enjoy!",
+        },
         nav: {
             home: "Home",
             about: "About",
@@ -30,7 +46,24 @@ const translations = {
         }
     },
     ar: {
-        hello: "مرحبا",
+        homepage: {
+            ticketeer: "تيكيتير",
+            slogan: "اجعل فعاليتك القادمة لا تُنسى",
+            description: "اكتشف، احجز، واستمتع بالفعاليات القريبة منك.",
+            featured: "الأحداث المميزة لهذا الشهر",
+            howItWorks: "كيف تعمل",
+            whyTicketeer: "لماذا تيكيتير؟",
+            testimonials: "ماذا يقول مستخدمونا",
+            browseEvents: "استعرض الفعاليات",
+            trusted: "موثوق به من قبل منظمي الفعاليات",
+            instantBooking: "تأكيد الحجز الفوري",
+            noHiddenFees: "لا توجد رسوم خفية",
+            testimonial1: "تجربة حجز سلسة وخدمة عملاء ممتازة. - سارة محمد",
+            testimonial2: "وجدت جميع الفعاليات الكبرى في مدينتي بسهولة. - أحمد علي",
+            browse: "استعرض الفعاليات المتاحة",
+            book: "احجز تذكرتك على الفور",
+            confirmation: "احصل على تأكيدك واستمتع!",
+        },
         nav: {
             home: "الرئيسية",
             about: "من نحن",
