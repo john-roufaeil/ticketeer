@@ -1,15 +1,14 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import dbConnect from "@/app/lib/mongodb";
 import Booking from "@/models/Booking";
 
 export async function GET(
-  req: Request,
-  context: { params: Record<string, string> }
+  req: NextRequest,
+  { params }: { params: Promise<{ userId: string }> }
 ) {
   try {
+    const { userId } = await params;
     await dbConnect();
-
-    const userId = context.params.userId;
 
     if (!userId) {
       return NextResponse.json(
