@@ -1,5 +1,4 @@
 'use client';
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Event from "@/types/Event";
@@ -8,14 +7,18 @@ import { Button } from "@/components/ui/button";
 import { Calendar, PinIcon, ChevronRight, ChevronLeft } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
+import { toast } from "sonner";
+import Link from "next/link";
 
-// export default function EventDetailsPage({ params }: { params: { id: string } }) {
 export default function ProductDetailsPage() {
+    const { user, bookings, login } = useAuth();
     const { t, language } = useLanguage();
     const { id } = useParams<{ id: string }>();
     const router = useRouter();
-
     const [event, setEvent] = useState<Event | null>(null);
+    const isBooked = event ? bookings.some(booking => booking.eventId._id === event._id) : false;
+
     useEffect(() => {
         const fetchEventByID = async () => {
             const res = await fetch(`/api/events/${id}`);
@@ -28,6 +31,39 @@ export default function ProductDetailsPage() {
         };
         fetchEventByID();
     }, [id]);
+
+    console.log("EVENT", event);
+    console.log("BOOKINGS", bookings);
+    const handleBookNow = async () => {
+        if (!user) {
+            router.push('/login');
+            return;
+        }
+
+        const res = await fetch('/api/bookings', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('auth_token')}`
+            },
+            body: JSON.stringify({
+                eventId: event?._id,
+                userId: user._id
+            }),
+        });
+
+        if (res.ok) {
+            toast.success(t('event.bookingSuccess'));
+            const token = localStorage.getItem('auth_token');
+            const userId = user?._id;
+            if (token && userId) {
+                login(token, userId);
+            }
+            router.push('/congratulations');
+        } else {
+            toast.error(t('event.bookingError'));
+        }
+    };
 
     if (!event) {
         return <div className="text-center py-10">Loading event details...</div>;
@@ -66,11 +102,15 @@ export default function ProductDetailsPage() {
                 </div>
                 <p className="text-lg font-semibold mb-4">{event.price}{t('general.egp')}</p>
 
-                <Link href={`/book/${event._id}`}>
-                    <Button variant="primary" className="px-4 py-2">
+                {isBooked ? (
+                    <div className="p-4 mb-4 rounded bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                        {t('event.alreadyBooked')}
+                    </div>
+                ) : (
+                    <Button variant="primary" onClick={handleBookNow} className="px-4 py-2">
                         {t('event.bookNow')}
                     </Button>
-                </Link>
+                )}
             </div>
         </main>
     );

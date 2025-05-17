@@ -55,6 +55,10 @@ const translations = {
             booked: "Booked",
             eventDetails: "Event Details",
             backToEvents: "Back to Events",
+            bookingSuccess: "Booking successful!",
+            bookingError: "Booking failed.",
+            alreadyBooked: "You have already booked this event.",
+            viewDetails: "View Details",
         },
         auth: {
             signin: "Sign in",
@@ -74,6 +78,12 @@ const translations = {
             registerError: "Registration failed.",
             loginSuccess: "Login successful!",
             loginError: "Login failed.",
+        },
+        congratulations: {
+            title: "Congratulations!",
+            message: "You have successfully booked the event.",
+            viewDetails: "View Details",
+            backToEvents: "Back to Events",
         }
     },
     ar: {
@@ -119,6 +129,10 @@ const translations = {
             booked: "تم الحجز",
             eventDetails: "تفاصيل الفعالية",
             backToEvents: "العودة إلى الفعاليات",
+            bookingSuccess: "تم الحجز بنجاح!",
+            bookingError: "فشل الحجز.",
+            alreadyBooked: "لقد قمت بحجز هذه الفعالية بالفعل.",
+            viewDetails: "عرض التفاصيل",
         },
         auth: {
             signin: "تسجيل الدخول",
@@ -136,6 +150,12 @@ const translations = {
             createAccount: "إنشاء حساب جديد",
             loginSuccess: "تم تسجيل الدخول بنجاح!",
             loginError: "فشل تسجيل الدخول.",
+        },
+        congratulations: {
+            title: "تهانينا!",
+            message: "لقد قمت بحجز الفعالية بنجاح.",
+            viewDetails: "عرض التفاصيل",
+            backToEvents: "العودة إلى الفعاليات",
         }
     }
 };

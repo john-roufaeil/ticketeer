@@ -4,10 +4,13 @@ import { Hero } from "@/app/components/Hero";
 import { useEffect, useState } from 'react';
 import Link from "next/link";
 import Event from "@/types/Event";
+import { useAuth } from "@/context/AuthContext";
+import { Button } from "@/components/ui/button";
 
 export default function HomePage() {
     const { t, language } = useLanguage();
     const [events, setEvents] = useState([]);
+    const { bookings } = useAuth();
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -26,17 +29,34 @@ export default function HomePage() {
                     <h2 className="text-3xl font-semibold">{t('homepage.availableEvents')}</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {events.length > 0 ? (
-                            events.map((event: Event) => (
-                                <div key={event?._id} className="bg-light-surface dark:bg-dark-surface rounded-lg shadow p-4 transition hover:shadow-lg">
-                                    <img src={event.image || "/placeholder.jpg"} alt={event?.nameEN} className="w-full h-48 object-cover rounded mb-4" />
-                                    <h3 className="text-xl font-semibold mb-2">{language === "ar" ? event?.nameAR : event?.nameEN}</h3>
-                                    <p className="text-gray-600 dark:text-gray-400 mb-2">{language === "ar" ? event?.categoryAR : event?.categoryEN} - {new Date(event?.date).toLocaleDateString(language)}</p>
-                                    <p className="text-gray-700 dark:text-gray-300 mb-4">{language === "ar" ? event?.descriptionAR : event?.descriptionEN}</p>
-                                    <Link href={`/events/${event?._id}`} className="inline-block bg-light-primary dark:bg-dark-primary text-white px-4 py-2 rounded hover:opacity-90 transition">
-                                        {t('homepage.bookNow')}
-                                    </Link>
-                                </div>
-                            ))
+                            events.map((event: Event) => {
+                                console.log(event);
+                                const isBooked = event ? bookings.some(booking => booking.eventId._id === event._id) : false;
+
+                                return (
+                                    <div key={event?._id} className="bg-light-surface dark:bg-dark-surface rounded-lg shadow p-4 transition hover:shadow-lg">
+                                        <img src={event.image || "/placeholder.jpg"} alt={event?.nameEN} className="w-full h-48 object-cover rounded mb-4" />
+                                        <h3 className="text-xl font-semibold mb-2">{language === "ar" ? event?.nameAR : event?.nameEN}</h3>
+                                        <p className="text-gray-600 dark:text-gray-400 mb-2">{language === "ar" ? event?.categoryAR : event?.categoryEN} - {new Date(event?.date).toLocaleDateString(language)}</p>
+                                        <p className="text-gray-700 dark:text-gray-300 mb-4">{language === "ar" ? event?.descriptionAR : event?.descriptionEN}</p>
+
+                                        {isBooked ? (
+                                            <>
+                                                <div className="p-4 mb-4 rounded bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                                                    {t('event.alreadyBooked')}
+                                                </div>
+                                                <Link href={`/events/${event?._id}`} className="inline-block bg-light-primary dark:bg-dark-primary text-white px-4 py-2 rounded hover:opacity-90 transition">
+                                                    {t('event.viewDetails')}
+                                                </Link>
+                                            </>
+                                        ) : (
+                                            <Link href={`/events/${event?._id}`} className="inline-block bg-light-primary dark:bg-dark-primary text-white px-4 py-2 rounded hover:opacity-90 transition">
+                                                {t('homepage.bookNow')}
+                                            </Link>
+                                        )}
+                                    </div>
+                                );
+                            })
                         ) : (
                             <p className="text-gray-600 dark:text-gray-400">{t('homepage.noEvents')}</p>
                         )}

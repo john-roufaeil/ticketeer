@@ -1,6 +1,5 @@
 'use client';
-
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import User from '@/types/User';
 import Booking from '@/types/Booking';
 
@@ -32,45 +31,32 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             .catch(() => setBookings([]));
     };
 
-    // useEffect(() => {
-    //     const token = localStorage.getItem('auth_token');
-    //     const tokenPayload = token ? JSON.parse(atob(token.split('.')[1])) : null;
-    //     const userId = tokenPayload ? tokenPayload.userId : null;
-
-    //     if (token && userId) {
-    //         fetch(`/api/bookings/${userId}`, {
-    //             headers: { Authorization: `Bearer ${token}` },
-    //         })
-    //             .then(res => res.json())
-    //             .then(data => {
-    //                 setUser({ ...data.user, _id: data.user.id });
-    //                 fetchBookings(userId, token);
-    //             })
-    //             .catch(() => {
-    //                 setUser(null);
-    //                 setBookings([]);
-    //             })
-    //             .finally(() => setLoading(false));
-    //     } else {
-    //         setLoading(false);
-    //     }
-    // }, []);
-
-    const login = (token: string, userId: string) => {
+    const login = async (token: string, userId: string) => {
         setLoading(true);
-        localStorage.setItem('auth_token', token);
-        console.log('URL:', `/api/bookings/${userId}`);
-        fetch(`/api/bookings/${userId}`, {
-            headers: { Authorization: `Bearer ${token}` },
-        })
-            .then(res => res.json())
-            .then(data => {
-                setLoading(false);
-                console.log('DATA:', data);
-                setUser({ ...data.bookings });
-                fetchBookings(userId, token);
+        try {
+            localStorage.setItem('auth_token', token);
+
+            const userRes = await fetch(`/api/users/${userId}`, {
+                headers: { Authorization: `Bearer ${token}` },
             });
+            const userData = await userRes.json();
+
+            const bookingsRes = await fetch(`/api/bookings/${userId}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            const bookingsData = await bookingsRes.json();
+
+            setBookings(bookingsData.bookings || []);
+            setUser(userData);
+        } catch (error) {
+            console.error("Failed to fetch user data:", error);
+            setUser(null);
+        } finally {
+            setLoading(false);
+        }
     };
+
+
 
     const logout = () => {
         localStorage.removeItem('auth_token');
@@ -78,6 +64,29 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setBookings([]);
         window.location.href = '/';
     };
+
+    // ✅ Restore session on mount
+    useEffect(() => {
+        const token = localStorage.getItem('auth_token');
+        if (!token) {
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+            const userId = tokenPayload.userId;
+
+            if (userId) {
+                login(token, userId);
+            } else {
+                setLoading(false);
+            }
+        } catch (error) {
+            console.error('Token parsing failed:', error);
+            setLoading(false);
+        }
+    }, []);
 
     return (
         <AuthContext.Provider value={{ user, bookings, loading, login, logout, setUser, fetchBookings }}>
