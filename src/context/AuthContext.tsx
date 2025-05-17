@@ -7,7 +7,7 @@ type AuthContextType = {
     user: User | null;
     bookings: Booking[];
     loading: boolean;
-    login: (token: string, userId: string) => void;
+    login: (token: string, userId: string, redirect: boolean) => Promise<void>;
     logout: () => void;
     setUser: (user: User) => void;
     fetchBookings: (userId: string, token: string) => void;
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             .catch(() => setBookings([]));
     };
 
-    const login = async (token: string, userId: string) => {
+    const login = async (token: string, userId: string, redirect: boolean) => {
         setLoading(true);
         try {
             localStorage.setItem('auth_token', token);
@@ -45,9 +45,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 headers: { Authorization: `Bearer ${token}` },
             });
             const bookingsData = await bookingsRes.json();
-
             setBookings(bookingsData.bookings || []);
             setUser(userData);
+            if (redirect) {
+                if (userData.role === 'admin') {
+                    window.location.href = '/admin';
+                } else {
+                    window.location.href = '/';
+                }
+            }
         } catch (error) {
             console.error("Failed to fetch user data:", error);
             setUser(null);
@@ -78,7 +84,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             const userId = tokenPayload.userId;
 
             if (userId) {
-                login(token, userId);
+                login(token, userId, false);
             } else {
                 setLoading(false);
             }

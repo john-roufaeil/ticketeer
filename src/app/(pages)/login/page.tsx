@@ -30,7 +30,7 @@ export default function LoginPage() {
             setIsLoading(false);
             const data = await res.json();
             console.log("DATA", data);
-            login(data.token, data.user._doc._id);
+            login(data.token, data.user._doc._id, true);
             router.push('/');
             toast.success(t('auth.loginSuccess'));
         } else {

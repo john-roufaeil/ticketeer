@@ -29,7 +29,7 @@ export async function PUT(
   await dbConnect();
   const data = await req.json();
   const event = await Event.findByIdAndUpdate(id, data, { new: true });
-  return Response.json(event);
+  return NextResponse.json(event);
 }
 
 export async function DELETE(
@@ -39,5 +39,5 @@ export async function DELETE(
   const { id } = await params;
   await dbConnect();
   await Event.findByIdAndDelete(id);
-  return Response.json({ success: true });
+  return NextResponse.json({ success: true });
 }
