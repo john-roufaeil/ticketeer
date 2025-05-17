@@ -19,6 +19,7 @@ export function LanguageToggle() {
 
     return (
         <Button
+            variant="outline"
             onClick={() => setLanguage(isEnglish ? "ar" : "en")}
             className="flex items-center gap-2 px-4 py-2 border rounded"
         >

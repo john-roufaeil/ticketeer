@@ -20,6 +20,7 @@ export function ModeToggle() {
 
     return (
         <Button
+            variant="outline"
             onClick={() => setTheme(isDark ? "light" : "dark")}
             className="flex items-center gap-2 px-4 py-2 border rounded"
         >
