@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       "images.unsplash.com",
       "res.cloudinary.com",
       "via.placeholder.com",
+      "imgur.com",
     ],
   },
 };
