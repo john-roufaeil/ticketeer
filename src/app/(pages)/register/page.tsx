@@ -29,7 +29,13 @@ export default function RegisterPage() {
             setIsLoading(false);
             toast.success(t('auth.registerSuccess'));
         } else {
-            toast.error(t('auth.registerError'));
+            if (res.status === 400) {
+                toast.error(t('auth.emailAlreadyExists'));
+            } else if (res.status === 500) {
+                toast.error(t('auth.serverError'));
+            } else {
+                toast.error(t('auth.registerError'));
+            }
             setIsLoading(false);
         }
     };

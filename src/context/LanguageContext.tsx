@@ -1,5 +1,4 @@
 "use client";
-import { unauthorized } from 'next/navigation';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Language = 'en' | 'ar';
@@ -67,6 +66,9 @@ const translations = {
             viewDetails: "View Details",
         },
         auth: {
+            invalidCredentials: "Invalid email or password.",
+            serverError: "Server error. Please try again later.",
+            emailAlreadyExists: "Email already exists.",
             signin: "Sign in",
             signingIn: "Signing in...",
             signinDetails: "Enter your email and password to log in",
@@ -162,6 +164,9 @@ const translations = {
             viewDetails: "عرض التفاصيل",
         },
         auth: {
+            invalidCredentials: "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+            serverError: "خطأ في الخادم. يرجى المحاولة لاحقًا.",
+            emailAlreadyExists: "البريد الإلكتروني موجود بالفعل.",
             signin: "تسجيل الدخول",
             signingIn: "تسجيل الدخول...",
             signinDetails: "أدخل بريدك الإلكتروني وكلمة المرور لتسجيل الدخول",

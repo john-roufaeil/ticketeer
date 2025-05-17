@@ -64,7 +64,7 @@ export default function ProductDetailsPage() {
             const token = localStorage.getItem('auth_token');
             const userId = user?._id;
             if (token && userId) {
-                login(token, userId, true);
+                login(token, userId, false);
             }
             router.push('/congratulations');
         } else {

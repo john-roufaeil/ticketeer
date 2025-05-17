@@ -62,7 +62,10 @@ export default function AdminPanel() {
         const res = await fetch('/api/events', {
             method: 'POST',
             body: JSON.stringify(form),
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+            },
         });
         if (res.ok) {
             setForm({});
@@ -76,7 +79,10 @@ export default function AdminPanel() {
         const res = await fetch(`/api/events/${selectedEvent._id}`, {
             method: 'PUT',
             body: JSON.stringify(form),
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+            },
         });
         if (res.ok) {
             setForm({});
@@ -90,6 +96,10 @@ export default function AdminPanel() {
         if (!selectedEvent) return;
         const res = await fetch(`/api/events/${selectedEvent._id}`, {
             method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+            },
         });
         if (res.ok) {
             setModalType(null);

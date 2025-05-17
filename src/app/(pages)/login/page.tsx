@@ -35,7 +35,13 @@ export default function LoginPage() {
             toast.success(t('auth.loginSuccess'));
         } else {
             setIsLoading(false);
-            toast.error(t('auth.loginError'));
+            if (res.status === 401) {
+                toast.error(t('auth.invalidCredentials'));
+            } else if (res.status === 500) {
+                toast.error(t('auth.serverError'));
+            } else {
+                toast.error(t('auth.loginError'));
+            }
         }
     };
 
