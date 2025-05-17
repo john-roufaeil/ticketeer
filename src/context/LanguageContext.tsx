@@ -14,6 +14,9 @@ export const LanguageContext = createContext<LanguageContextType | undefined>(un
 
 const translations = {
     en: {
+        general: {
+            egp: "EGP",
+        },
         homepage: {
             ticketeer: "Ticketeer",
             slogan: "Make Your Next Event Unforgettable",
@@ -46,9 +49,18 @@ const translations = {
             terms: "Terms & Conditions",
             privacy: "Privacy Policy",
             rights: "All rights reserved.",
+        },
+        event: {
+            bookNow: "Book Now",
+            booked: "Booked",
+            eventDetails: "Event Details",
+            backToEvents: "Back to Events",
         }
     },
     ar: {
+        general: {
+            egp: "ج.م"
+        },
         homepage: {
             ticketeer: "تيكيتير",
             slogan: "اجعل فعاليتك القادمة لا تُنسى",
@@ -82,6 +94,12 @@ const translations = {
             terms: "الشروط والأحكام",
             privacy: "سياسة الخصوصية",
             rights: "جميع الحقوق محفوظة",
+        },
+        event: {
+            bookNow: "احجز الآن",
+            booked: "تم الحجز",
+            eventDetails: "تفاصيل الفعالية",
+            backToEvents: "العودة إلى الفعاليات",
         }
     }
 };

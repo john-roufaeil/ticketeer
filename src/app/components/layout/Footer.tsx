@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
         </Link>
     );
     return (
-        <footer className="bg-primary bg-brand text-white pt-12 pb-6 border-t-1 border-light-text dark:border-dark-text">
+        <footer className="bg-primary bg-brand text-white  py-2 border-t-1 border-light-text dark:border-dark-text">
             <div className="container mx-auto px-4">
                 <div className="flex flex-col md:flex-row sm:justify-start items- md:items-center gap-8 gap-x-30">
                     {/* Brand */}
@@ -46,7 +46,7 @@ const Footer: React.FC = () => {
                         <Logo />
                     </div>
 
-                    <div className="flex flex-col md:flex-row justify-between md:justify-start gap-6 md:gap-20">
+                    <div className="flex flex-col md:flex-row justify-between md:justify-start gap-6 md:gap-20 w-fit">
                         {/* Contact */}
                         <div className="flex-1">
                             <h3 className="text-lg font-semibold mb-2 text-light-text dark:text-dark-text">
@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
                             <address className="not-italic text-light-text dark:text-dark-text">
                                 <p>info@ticketeer.com</p>
                             </address>
-                            <div className="mt-2 flex space-x-4">
+                            <div className="mt-2 w-full flex space-x-4">
                                 <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-light-primary dark:hover:text-dark-primary hover:font-medium hover:scale-110 duration-300 transition-all active:scale-95 text-light-text dark:text-dark-text hover:underline">
                                     <FaInstagram size={24} />
                                 </a>
@@ -65,14 +65,14 @@ const Footer: React.FC = () => {
                                 <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer" className="hover:scale-110 duration-300 transition-all active:scale-95 text-light-text dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary hover:font-medium hover:underline">
                                     <FaTiktok size={24} />
                                 </a>
-                                <a href="https://whatsapp.com" target="_blank" rel="noopener noreferrer" className="hover:scale-110 duration-300 transition-all active:scale-95 text-light-text dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary hover:font-medium hover:underline">
+                                <a href="https://whatsapp.com" target="_blank" rel="noopener noreferrer" className="hover:scale-110 duration-300 w-fit transition-all active:scale-95 text-light-text dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary hover:font-medium hover:underline">
                                     <FaWhatsapp size={24} />
                                 </a>
                             </div>
                         </div>
 
                         {/* Links */}
-                        <div className="flex-1">
+                        {/* <div className="flex-1">
                             <h3 className="text-lg font-semibold mb-2 text-light-text dark:text-dark-text">
                                 {t('footer.links')}
                             </h3>
@@ -93,13 +93,13 @@ const Footer: React.FC = () => {
                                     </Link>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
-                <div className="mt-8 h-1 w-4/5 mx-auto bg-light-primary dark:bg-dark-primary rounded-lg" />
+                <div className="h-1 w-4/5 mx-auto bg-light-primary dark:bg-dark-primary rounded-lg" />
 
-                <div className="pt-6 text-sm text-center text-gray-400">
+                <div className="pt-4 text-sm text-center text-gray-400">
                     <p>
                         &copy; {currentYear} Ticketeer. {t('footer.rights')}
                     </p>

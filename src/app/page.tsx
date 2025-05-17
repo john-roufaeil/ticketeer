@@ -3,13 +3,13 @@ import { useLanguage } from "@/context/LanguageContext";
 import { Hero } from "@/app/components/Hero";
 import { useEffect, useState } from 'react';
 import Link from "next/link";
+import Event from "@/types/Event";
 
 export default function HomePage() {
     const { t, language } = useLanguage();
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
-        console.log("fetching events")
         const fetchEvents = async () => {
             const res = await fetch('/api/events');
             const data = await res.json();
@@ -17,18 +17,6 @@ export default function HomePage() {
         };
         fetchEvents();
     }, []);
-
-    type Event = {
-        _id: string;
-        nameEN: string;
-        nameAR: string;
-        descriptionEN: string;
-        descriptionAR: string;
-        categoryEN: string;
-        categoryAR: string;
-        date: string;
-        image: string;
-    };
 
     return (
         <main className="mx-auto space-y-16">
