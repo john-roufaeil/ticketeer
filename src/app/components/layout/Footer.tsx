@@ -70,30 +70,6 @@ const Footer: React.FC = () => {
                                 </a>
                             </div>
                         </div>
-
-                        {/* Links */}
-                        {/* <div className="flex-1">
-                            <h3 className="text-lg font-semibold mb-2 text-light-text dark:text-dark-text">
-                                {t('footer.links')}
-                            </h3>
-                            <ul className="text-light-text dark:text-dark-text space-y-1">
-                                <li>
-                                    <Link href="/faq" className="hover:underline hover:text-light-primary dark:hover:text-dark-primary hover:font-medium">
-                                        {t('footer.faq')}
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/privacy-policy" className="hover:underline hover:text-light-primary dark:hover:text-dark-primary hover:font-medium">
-                                        {t('footer.privacy')}
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/terms-of-service" className="hover:underline hover:text-light-primary dark:hover:text-dark-primary hover:font-medium">
-                                        {t('footer.terms')}
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div> */}
                     </div>
                 </div>
 

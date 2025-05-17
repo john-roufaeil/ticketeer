@@ -9,7 +9,6 @@ export function ModeToggle() {
     const { setTheme, resolvedTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
-    // Avoid hydration issues
     useEffect(() => {
         setMounted(true);
     }, []);

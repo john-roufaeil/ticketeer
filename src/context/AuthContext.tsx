@@ -71,7 +71,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         window.location.href = '/';
     };
 
-    // ✅ Restore session on mount
     useEffect(() => {
         const token = localStorage.getItem('auth_token');
         if (!token) {

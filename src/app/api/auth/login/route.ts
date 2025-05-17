@@ -20,7 +20,6 @@ export async function POST(req: Request) {
     expiresIn: "24h",
   });
 
-  console.log("Token:", token);
   return NextResponse.json({
     token,
     user: { ...user, passwordHash: undefined },

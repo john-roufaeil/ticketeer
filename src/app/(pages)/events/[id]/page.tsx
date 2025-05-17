@@ -39,8 +39,6 @@ export default function ProductDetailsPage() {
         fetchEventByID();
     }, [id]);
 
-    console.log("EVENT", event);
-    console.log("BOOKINGS", bookings);
     const handleBookNow = async () => {
         if (!user) {
             router.push('/login');

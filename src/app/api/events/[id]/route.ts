@@ -10,7 +10,6 @@ export async function GET(
 ) {
   const { id } = await params;
   await dbConnect();
-  console.log("Fetching event with ID:", id);
   try {
     const event = await Event.findById(id);
     if (!event) {

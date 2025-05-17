@@ -58,7 +58,6 @@ export default function AdminPanel() {
     };
 
     const createEvent = async () => {
-        console.log(form);
         const res = await fetch('/api/events', {
             method: 'POST',
             body: JSON.stringify(form),

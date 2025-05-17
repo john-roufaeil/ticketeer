@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 export function LanguageToggle() {
     const [mounted, setMounted] = useState(false);
     const { language, setLanguage } = useLanguage();
-    // Avoid hydration issues
     useEffect(() => {
         setMounted(true);
     }, []);

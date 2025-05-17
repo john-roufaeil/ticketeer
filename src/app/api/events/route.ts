@@ -29,7 +29,6 @@ export async function POST(req: NextRequest) {
       userId: string;
       role?: string;
     };
-    console.log("Payload:", payload);
 
     if (payload.role !== "admin") {
       return NextResponse.json(

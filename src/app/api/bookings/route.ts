@@ -3,19 +3,6 @@ import Booking from "@/models/Booking";
 import jwt from "jsonwebtoken";
 import { NextResponse, NextRequest } from "next/server";
 
-// export async function POST(req) {
-//     await dbConnect();
-//     const data = await req.json();
-//     const booking = await Booking.create(data);
-//     return Response.json(booking);
-// }
-
-// export async function GET() {
-//     await dbConnect();
-//     const bookings = await Booking.find();
-//     return Response.json(bookings);
-// }
-
 const JWT_SECRET = process.env.JWT_SECRET!;
 
 export async function POST(req: NextRequest) {

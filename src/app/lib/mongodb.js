@@ -1,8 +1,4 @@
 import mongoose from 'mongoose';
-// import User from "@/models/User";
-// import Order from "@/models/Order";
-// import Product from "@/models/Product";
-
 const MONGO_URI = process.env.MONGO_URI;
 
 if (!MONGO_URI) {
@@ -22,10 +18,6 @@ async function dbConnect() {
         cached.promise = mongoose.connect(MONGO_URI).then((mongoose) => mongoose);
     }
     cached.conn = await cached.promise;
-    // mongoose.model("User");
-    // mongoose.model("Order");
-    // mongoose.model("Product");
-    console.log("MongoDB connected");
     return cached.conn;
 }
 

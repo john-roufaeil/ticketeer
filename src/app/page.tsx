@@ -36,7 +36,6 @@ export default function HomePage() {
                     <div className={`grid gap-6 ${loading ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`}>
                         {events.length > 0 ? (
                             events.map((event: Event) => {
-                                console.log(event);
                                 const isBooked = event
                                     ? bookings.some(booking => {
                                         if (typeof booking.eventId === 'string') {
