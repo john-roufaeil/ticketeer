@@ -1,4 +1,7 @@
 "use client";
+import { sign } from 'crypto';
+import { register } from 'module';
+import { Signika } from 'next/font/google';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Language = 'en' | 'ar';
@@ -55,6 +58,23 @@ const translations = {
             booked: "Booked",
             eventDetails: "Event Details",
             backToEvents: "Back to Events",
+        },
+        auth: {
+            signin: "Sign in",
+            signingIn: "Signing in...",
+            signinDetails: "Enter your email and password to log in",
+            emailPlaceholder: "Email",
+            passwordPlaceholder: "Password",
+            dontHaveAccount: "Don't have an account?",
+            register: "Register",
+            registering: "Registering...",
+            registerDetails: "Create an account to book events",
+            email: "Email",
+            password: "Password",
+            alreadyHaveAccount: "Already have an account?",
+            createAccount: "Create a new account",
+            registerSuccess: "Registration successful!",
+            registerError: "Registration failed.",
         }
     },
     ar: {
@@ -100,6 +120,21 @@ const translations = {
             booked: "تم الحجز",
             eventDetails: "تفاصيل الفعالية",
             backToEvents: "العودة إلى الفعاليات",
+        },
+        auth: {
+            signin: "تسجيل الدخول",
+            signingIn: "تسجيل الدخول...",
+            signinDetails: "أدخل بريدك الإلكتروني وكلمة المرور لتسجيل الدخول",
+            emailPlaceholder: "البريد الإلكتروني",
+            passwordPlaceholder: "كلمة المرور",
+            dontHaveAccount: "ليس لديك حساب؟",
+            register: "إنشاء حساب",
+            registerDetails: "أنشئ حسابًا لحجز الفعاليات",
+            registering: "جارٍ التسجيل...",
+            email: "البريد الإلكتروني",
+            password: "كلمة المرور",
+            alreadyHaveAccount: "هل لديك حساب بالفعل؟",
+            createAccount: "إنشاء حساب جديد",
         }
     }
 };

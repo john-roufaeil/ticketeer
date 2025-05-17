@@ -27,7 +27,7 @@ export default function HomePage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {events.length > 0 ? (
                             events.map((event: Event) => (
-                                <div key={event?._id} className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 transition hover:shadow-lg">
+                                <div key={event?._id} className="bg-light-surface dark:bg-dark-surface rounded-lg shadow p-4 transition hover:shadow-lg">
                                     <img src={event.image || "/placeholder.jpg"} alt={event?.nameEN} className="w-full h-48 object-cover rounded mb-4" />
                                     <h3 className="text-xl font-semibold mb-2">{language === "ar" ? event?.nameAR : event?.nameEN}</h3>
                                     <p className="text-gray-600 dark:text-gray-400 mb-2">{language === "ar" ? event?.categoryAR : event?.categoryEN} - {new Date(event?.date).toLocaleDateString(language)}</p>

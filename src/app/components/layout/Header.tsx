@@ -88,7 +88,7 @@ export default function Header() {
                 {!isMobile && (
                     <div className="flex items-center space-x-2">
                         <Button variant="outline" size="icon" asChild>
-                            <Link href="/profile">
+                            <Link href="/login">
                                 <User className="h-[1.2rem] w-[1.2rem]" />
                                 <span className="sr-only">Profile</span>
                             </Link>
