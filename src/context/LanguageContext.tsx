@@ -32,6 +32,7 @@ const translations = {
             confirmation: "Get your confirmation and enjoy!",
             bookNow: "Book Now",
             availableEvents: "Available Events",
+            noEvents: "No events available at the moment.",
         },
         nav: {
             home: "Home",
@@ -67,6 +68,7 @@ const translations = {
             confirmation: "احصل على تأكيدك واستمتع!",
             bookNow: "احجز الآن",
             availableEvents: "الفعاليات المتاحة",
+            noEvents: "لا توجد فعاليات متاحة في الوقت الحالي.",
         },
         nav: {
             home: "الرئيسية",
