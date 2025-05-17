@@ -1,12 +1,13 @@
 'use client';
 import { useState } from 'react';
-// import { useRouter } from 'next/navigation';
-// import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from 'next/link';
+import { toast } from 'sonner';
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function LoginPage() {
@@ -14,23 +15,28 @@ export default function LoginPage() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false);
-    // const router = useRouter();
-    // const { login } = useAuth();
+    const router = useRouter();
+    const { login } = useAuth();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        //     const res = await fetch('/api/auth/login', {
-        //         method: 'POST',
-        //         body: JSON.stringify(form),
-        //     });
+        setIsLoading(true);
+        const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            body: JSON.stringify({ email, password }),
+        });
 
-        //     if (res.ok) {
-        //         const data = await res.json();
-        //         login(data.token, data.user._id);
-        //         router.push('/');
-        //     } else {
-        //         alert('Login failed');
-        //     }
+        if (res.ok) {
+            setIsLoading(false);
+            const data = await res.json();
+            console.log("DATA", data);
+            login(data.token, data.user._doc._id);
+            router.push('/');
+            toast.success(t('auth.loginSuccess'));
+        } else {
+            setIsLoading(false);
+            toast.error(t('auth.loginError'));
+        }
     };
 
     return (

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, User } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { ModeToggle } from "./ModeToggle";
 import { LanguageToggle } from "./LanguageToggle";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/context/AuthContext";
 
 import lightLogo from "@/../public/lightLogoCropped.png";
 import darkLogo from "@/../public/darkLogoCropped.png";
@@ -21,6 +22,7 @@ import darkLogoAR from "@/../public/darkLogoARCropped.png";
 
 export default function Header() {
     const { language, t } = useLanguage();
+    const { user, logout } = useAuth();
     const { resolvedTheme } = useTheme();
     const pathname = usePathname();
     const isMobile = useIsMobile();
@@ -87,12 +89,21 @@ export default function Header() {
 
                 {!isMobile && (
                     <div className="flex items-center space-x-2">
-                        <Button variant="outline" size="icon" asChild>
-                            <Link href="/login">
-                                <User className="h-[1.2rem] w-[1.2rem]" />
-                                <span className="sr-only">Profile</span>
-                            </Link>
-                        </Button>
+                        {user ?
+                            (<Button variant="outline" size="icon" asChild onClick={() => { logout(); }}>
+                                <Link href="/login">
+                                    <LogOut className="h-[1.2rem] w-[1.2rem]" />
+                                    <span className="sr-only">Log out</span>
+                                </Link>
+                            </Button>)
+                            : (<Button variant="outline" size="icon" asChild>
+                                <Link href="/login">
+                                    <User className="h-[1.2rem] w-[1.2rem]" />
+                                    <span className="sr-only">Log in</span>
+                                </Link>
+                            </Button>)
+                        }
+
                         <ModeToggle />
                         <LanguageToggle />
                     </div>

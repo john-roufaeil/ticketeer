@@ -1,7 +1,4 @@
 "use client";
-import { sign } from 'crypto';
-import { register } from 'module';
-import { Signika } from 'next/font/google';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Language = 'en' | 'ar';
@@ -75,6 +72,8 @@ const translations = {
             createAccount: "Create a new account",
             registerSuccess: "Registration successful!",
             registerError: "Registration failed.",
+            loginSuccess: "Login successful!",
+            loginError: "Login failed.",
         }
     },
     ar: {
@@ -135,6 +134,8 @@ const translations = {
             password: "كلمة المرور",
             alreadyHaveAccount: "هل لديك حساب بالفعل؟",
             createAccount: "إنشاء حساب جديد",
+            loginSuccess: "تم تسجيل الدخول بنجاح!",
+            loginError: "فشل تسجيل الدخول.",
         }
     }
 };

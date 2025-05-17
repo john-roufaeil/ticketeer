@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import User from '@/types/User';
 import Booking from '@/types/Booking';
 
@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [loading, setLoading] = useState(true);
 
     const fetchBookings = (userId: string, token: string) => {
-        fetch(`/api/bookings/user/${userId}`, {
+        fetch(`/api/bookings/${userId}`, {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then(res => res.json())
@@ -32,38 +32,42 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             .catch(() => setBookings([]));
     };
 
-    useEffect(() => {
-        const token = localStorage.getItem('auth_token');
-        const tokenPayload = token ? JSON.parse(atob(token.split('.')[1])) : null;
-        const userId = tokenPayload ? tokenPayload.userId : null;
+    // useEffect(() => {
+    //     const token = localStorage.getItem('auth_token');
+    //     const tokenPayload = token ? JSON.parse(atob(token.split('.')[1])) : null;
+    //     const userId = tokenPayload ? tokenPayload.userId : null;
 
-        if (token && userId) {
-            fetch(`/api/auth/${userId}`, {
-                headers: { Authorization: `Bearer ${token}` },
-            })
-                .then(res => res.json())
-                .then(data => {
-                    setUser({ ...data.user, _id: data.user.id });
-                    fetchBookings(userId, token);
-                })
-                .catch(() => {
-                    setUser(null);
-                    setBookings([]);
-                })
-                .finally(() => setLoading(false));
-        } else {
-            setLoading(false);
-        }
-    }, []);
+    //     if (token && userId) {
+    //         fetch(`/api/bookings/${userId}`, {
+    //             headers: { Authorization: `Bearer ${token}` },
+    //         })
+    //             .then(res => res.json())
+    //             .then(data => {
+    //                 setUser({ ...data.user, _id: data.user.id });
+    //                 fetchBookings(userId, token);
+    //             })
+    //             .catch(() => {
+    //                 setUser(null);
+    //                 setBookings([]);
+    //             })
+    //             .finally(() => setLoading(false));
+    //     } else {
+    //         setLoading(false);
+    //     }
+    // }, []);
 
     const login = (token: string, userId: string) => {
+        setLoading(true);
         localStorage.setItem('auth_token', token);
-        fetch(`/api/auth/${userId}`, {
+        console.log('URL:', `/api/bookings/${userId}`);
+        fetch(`/api/bookings/${userId}`, {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then(res => res.json())
             .then(data => {
-                setUser({ ...data.user, _id: data.user.id });
+                setLoading(false);
+                console.log('DATA:', data);
+                setUser({ ...data.bookings });
                 fetchBookings(userId, token);
             });
     };
