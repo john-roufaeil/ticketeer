@@ -4,6 +4,15 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
+      keyframes: {
+        "spinner-leaf-fade": {
+          "0%, 39%, 100%": { opacity: "0.3" },
+          "40%": { opacity: "1" },
+        },
+      },
+      animation: {
+        "spinner-leaf-fade": "spinner-leaf-fade 1.2s linear infinite",
+      },
       colors: {
         light: {
           primary: "var(--color-light-primary)",

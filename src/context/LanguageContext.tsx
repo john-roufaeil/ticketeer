@@ -1,4 +1,5 @@
 "use client";
+import { unauthorized } from 'next/navigation';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Language = 'en' | 'ar';
@@ -14,6 +15,11 @@ export const LanguageContext = createContext<LanguageContextType | undefined>(un
 
 const translations = {
     en: {
+        unauthorized: {
+            title: "Unauthorized",
+            message: "You do not have permission to access this page.",
+            backToHomepage: "Back to homepage",
+        },
         general: {
             egp: "EGP",
         },
@@ -57,7 +63,7 @@ const translations = {
             backToEvents: "Back to Events",
             bookingSuccess: "Booking successful!",
             bookingError: "Booking failed.",
-            alreadyBooked: "You have already booked this event.",
+            alreadyBooked: "You booked this event.",
             viewDetails: "View Details",
         },
         auth: {
@@ -103,6 +109,11 @@ const translations = {
         }
     },
     ar: {
+        unauthorized: {
+            title: "غير مصرح",
+            message: "ليس لديك إذن للوصول إلى هذه الصفحة.",
+            backToHomepage: "العودة إلى الصفحة الرئيسية",
+        },
         general: {
             egp: "ج.م"
         },

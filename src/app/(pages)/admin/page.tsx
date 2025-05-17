@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
+import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 type Event = {
     _id: string;
@@ -24,6 +26,8 @@ export default function AdminPanel() {
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
     const [modalType, setModalType] = useState<'view' | 'edit' | 'create' | 'delete-confirm' | null>(null);
     const [form, setForm] = useState<Partial<Event>>({});
+    const { user, loading } = useAuth();
+    const router = useRouter();
 
     const fetchEvents = async () => {
         const res = await fetch('/api/events');
@@ -34,6 +38,20 @@ export default function AdminPanel() {
     useEffect(() => {
         fetchEvents();
     }, []);
+
+    useEffect(() => {
+        if (!loading && user && user.role !== 'admin') {
+            router.replace('/unauthorized');
+        }
+    }, [user, loading, router]);
+
+    if (loading) {
+        return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
+    }
+
+    if (!user || user.role !== 'admin') {
+        return null;
+    }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
