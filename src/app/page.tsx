@@ -6,18 +6,20 @@ import Link from "next/link";
 import Event from "@/types/Event";
 import { useAuth } from "@/context/AuthContext";
 import Image from "next/image";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function HomePage() {
     const { t, language } = useLanguage();
     const [events, setEvents] = useState([]);
     const { bookings } = useAuth();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchEvents = async () => {
             const res = await fetch('/api/events');
             const data = await res.json();
-            console.log(data);
             setEvents(data.events);
+            setLoading(false);
         };
         fetchEvents();
     }, []);
@@ -28,7 +30,7 @@ export default function HomePage() {
             <div className="space-y-8 px-24 mb-16">
                 <section className="space-y-4">
                     <h2 className="text-3xl font-semibold">{t('homepage.availableEvents')}</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className={`grid gap-6 ${loading ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`}>
                         {events.length > 0 ? (
                             events.map((event: Event) => {
                                 console.log(event);
@@ -65,9 +67,14 @@ export default function HomePage() {
                                     </div>
                                 );
                             })
-                        ) : (
-                            <p className="text-gray-600 dark:text-gray-400">{t('homepage.noEvents')}</p>
-                        )}
+                        ) : loading ? (
+                            <div className="w-full flex items-center justify-center min-h-screen">
+                                <Spinner size="lg" className="text-4xl bg-light-primary dark:bg-dark-primary" />
+                            </div>
+                        )
+                            : (
+                                <p className="text-gray-600 dark:text-gray-400">{t('homepage.noEvents')}</p>
+                            )}
                     </div>
                 </section>
                 <section className="space-y-4">
