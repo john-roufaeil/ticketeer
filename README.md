@@ -47,8 +47,8 @@ It also provides an **Admin Panel** for event managers to:
 ### 1. Clone the Repository
 
 ```bash
-git clone git@github.com:john-roufaeil/ATC_01099037843.git
-cd ATC_01099037843
+git clone git@github.com:john-roufaeil/ticketeer.git
+cd ticketeer
 ```
 
 ### 2. Install Dependencies
